@@ -1,4 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:unnamed_color_picker/components/palette_containers.dart';
+import 'package:unnamed_color_picker/themes/light_theme.dart';
+import 'package:unnamed_color_picker/themes/dark_theme.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -8,33 +12,6 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
-  Widget paletteContainers(int r, int g, int b) {
-    r = r.clamp(0, 255);
-    g = g.clamp(0, 255);
-    b = b.clamp(0, 255);
-    const dynamic size = 165;
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Container(
-          margin: const EdgeInsets.all(15),
-          height: size,
-          width: size,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(25),
-              color: Color.fromRGBO(r, g, b, 1.0)),
-        ),
-        Container(
-          margin: const EdgeInsets.all(15),
-          height: size,
-          width: size,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(25),
-              color: Color.fromRGBO(255 - r, 255 - g, 255 - b, 1.0)),
-        )
-      ],
-    );
-  }
 
   final appState = ColorPickerAppState();
 
@@ -45,28 +22,22 @@ class _HomepageState extends State<Homepage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           paletteContainers(203, 75, 70),
+          const SizedBox(
+            height: 20,
+          ),
           ElevatedButton(
             onPressed: () {},
             child: const Text('Pick a color'),
           ),
           const SizedBox(
-            height: 15,
+            height: 20,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              ElevatedButton(
-                onPressed: () => appState.changeToLightTheme(),
-                child: const Text('Light mode'),
-              ),
-              const SizedBox(
-                width: 20,
-              ),
-              ElevatedButton(
-                onPressed: () => appState.changeToDarkTheme,
-                child: const Text('Dark mode'),
-              ),
-            ],
+          ElevatedButton(
+            onPressed: () => appState.toggleThemeMode(),
+            child: const Text('Toggle theme mode'),
+          ),
+          const SizedBox(
+            width: 40,
           ),
         ],
       ),
@@ -75,14 +46,18 @@ class _HomepageState extends State<Homepage> {
 }
 
 class ColorPickerAppState extends ChangeNotifier {
-  ThemeMode themeMode = ThemeMode.system;
-  void changeToLightTheme() {
-    themeMode = ThemeMode.light;
-    notifyListeners();
-  }
+  ThemeData themeData = lightTheme;
+  void toggleThemeMode() {
+    if (kDebugMode) {
+      print('$runtimeType toggled');
+      print('homepage.dart: $themeData');
+    }
+    if (themeData == lightTheme) {
+      themeData = darkTheme;
 
-  void changeToDarkTheme() {
-    themeMode = ThemeMode.dark;
+    } else {
+      themeData = lightTheme;
+    }
     notifyListeners();
   }
-}
+}//theme switcher
