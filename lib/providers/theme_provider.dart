@@ -4,17 +4,19 @@ import 'package:unnamed_color_picker/themes/dark_theme.dart';
 import 'package:unnamed_color_picker/themes/light_theme.dart';
 
 class ThemeProvider extends ChangeNotifier {
-  ThemeData themeData = lightTheme;
+  ThemeData _themeData = lightTheme;
+  ThemeData get theme => _themeData;
+
   void toggleThemeData() {
     if (kDebugMode) {
       print('$runtimeType toggled');
-      print('homepage.dart: $themeData');
+      print('homepage.dart: $_themeData');
     }
-    if (themeData == lightTheme) {
-      themeData = darkTheme;
+    if (_themeData == lightTheme) {
+      _themeData = darkTheme;
 
     } else {
-      themeData = lightTheme;
+      _themeData = lightTheme;
     }
     notifyListeners();
   }

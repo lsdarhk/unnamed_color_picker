@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:unnamed_color_picker/components/palette_containers.dart';
-
-import '../providers/theme_provider.dart';
+import 'package:unnamed_color_picker/providers/theme_provider.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -11,16 +11,14 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
-
-  final themeProvider = ThemeProvider();
-
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          paletteContainers(203, 75, 70),
+          paletteContainers(25, 135, 150),
           const SizedBox(
             height: 20,
           ),

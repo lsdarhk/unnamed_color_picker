@@ -19,11 +19,11 @@ class ColorPickerApp extends StatelessWidget {
           final themeProvider = Provider.of<ThemeProvider>(context);
           if (kDebugMode) {
             print('App is building');
-            print('main.dart: ${themeProvider.themeData}');
+            print('main.dart: ${themeProvider.theme}');
           }
           return MaterialApp(
             home: const Homepage(),
-            theme: themeProvider.themeData,
+            theme: themeProvider.theme,
             debugShowCheckedModeBanner: false,
           );
         });
