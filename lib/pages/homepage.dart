@@ -30,7 +30,7 @@ class _HomepageState extends State<Homepage> {
             height: 20,
           ),
           ElevatedButton(
-            onPressed: () => themeProvider.toggleThemeData(),
+            onPressed: () => themeProvider.toggleTheme(),
             child: const Text('Toggle theme mode'),
           ),
           const SizedBox(

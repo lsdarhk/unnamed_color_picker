@@ -1,22 +1,15 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:unnamed_color_picker/themes/dark_theme.dart';
-import 'package:unnamed_color_picker/themes/light_theme.dart';
 
 class ThemeProvider extends ChangeNotifier {
-  ThemeData _themeData = lightTheme;
-  ThemeData get theme => _themeData;
+  ThemeMode _theme = ThemeMode.system;
+  ThemeMode get theme => _theme;
 
-  void toggleThemeData() {
-    if (kDebugMode) {
-      print('$runtimeType toggled');
-      print('homepage.dart: $_themeData');
-    }
-    if (_themeData == lightTheme) {
-      _themeData = darkTheme;
+  void toggleTheme() {
+    if (_theme == ThemeMode.light) {
+      _theme = ThemeMode.dark;
 
     } else {
-      _themeData = lightTheme;
+      _theme = ThemeMode.light;
     }
     notifyListeners();
   }

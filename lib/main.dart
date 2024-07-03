@@ -1,8 +1,8 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:unnamed_color_picker/pages/homepage.dart';
 import 'package:unnamed_color_picker/providers/theme_provider.dart';
+import 'package:unnamed_color_picker/themes.dart';
 
 void main() => runApp(
       const ColorPickerApp(),
@@ -17,13 +17,11 @@ class ColorPickerApp extends StatelessWidget {
         create: (context) => ThemeProvider(),
         builder: (context, child) {
           final themeProvider = Provider.of<ThemeProvider>(context);
-          if (kDebugMode) {
-            print('App is building');
-            print('main.dart: ${themeProvider.theme}');
-          }
           return MaterialApp(
             home: const Homepage(),
-            theme: themeProvider.theme,
+            theme: Themes.lightTheme,
+            darkTheme: Themes.darkTheme,
+            themeMode: themeProvider.theme,
             debugShowCheckedModeBanner: false,
           );
         });
