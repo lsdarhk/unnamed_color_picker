@@ -2,33 +2,30 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:unnamed_color_picker/pages/homepage.dart';
+import 'package:unnamed_color_picker/providers/theme_provider.dart';
 
 void main() => runApp(
-      ChangeNotifierProvider(
-        create: (context) => ColorPickerAppState(),
-        child: const ColorPickerApp(),
-      ),
+      const ColorPickerApp(),
     );
 
-class ColorPickerApp extends StatefulWidget {
+class ColorPickerApp extends StatelessWidget {
   const ColorPickerApp({super.key});
 
   @override
-  State<ColorPickerApp> createState() => _ColorPickerAppState();
-}
-
-class _ColorPickerAppState extends State<ColorPickerApp> {
-  @override
   Widget build(BuildContext context) {
-    ColorPickerAppState appState = Provider.of<ColorPickerAppState>(context);
-    if (kDebugMode) {
-      print('App is building');
-      print('main.dart: ${appState.themeData}');
-    }
-    return MaterialApp(
-      home: const Homepage(),
-      theme: appState.themeData,
-      debugShowCheckedModeBanner: false,
-    );
+    return ChangeNotifierProvider(
+        create: (context) => ThemeProvider(),
+        builder: (context, child) {
+          final themeProvider = Provider.of<ThemeProvider>(context);
+          if (kDebugMode) {
+            print('App is building');
+            print('main.dart: ${themeProvider.themeData}');
+          }
+          return MaterialApp(
+            home: const Homepage(),
+            theme: themeProvider.themeData,
+            debugShowCheckedModeBanner: false,
+          );
+        });
   }
 }
