@@ -3,14 +3,16 @@ import 'package:flutter/material.dart';
 class ThemeProvider extends ChangeNotifier {
   ThemeMode _theme = ThemeMode.system;
   ThemeMode get theme => _theme;
-
+  final systemBrightness =
+      WidgetsBinding.instance.platformDispatcher.platformBrightness;
   void toggleTheme() {
-    if (_theme == ThemeMode.light) {
-      _theme = ThemeMode.dark;
-
-    } else {
+    bool isDark =
+        systemBrightness == Brightness.dark || _theme == ThemeMode.dark;
+    if (isDark) {
       _theme = ThemeMode.light;
+    } else {
+      _theme = ThemeMode.dark;
     }
     notifyListeners();
   }
-}//theme switcher
+} //theme switcher using ThemeMode
