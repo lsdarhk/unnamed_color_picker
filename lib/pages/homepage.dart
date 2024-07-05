@@ -17,11 +17,14 @@ class _HomepageState extends State<Homepage> {
     final themeProvider = Provider.of<ThemeProvider>(context);
     //ColorScheme colorScheme = Theme.of(context).colorScheme;
     GlobalVariables gv = GlobalVariables();
+    final int red = gv.r;
+    final int green = gv.g;
+    final int blue = gv.b;
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          paletteContainers(gv.r, gv.g, gv.b),
+          paletteContainers(red, green, blue),
           const SizedBox(
             height: 20,
           ),

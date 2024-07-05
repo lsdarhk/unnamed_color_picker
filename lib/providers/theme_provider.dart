@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class ThemeProvider extends ChangeNotifier {
@@ -13,6 +14,9 @@ class ThemeProvider extends ChangeNotifier {
     } else {
       _theme = ThemeMode.dark;
     }
+    // if (kDebugMode) {
+    //   print('${gv.r}, ${gv.g}, ${gv.b}');
+    // }
     notifyListeners();
   }
 } //theme switcher using ThemeMode

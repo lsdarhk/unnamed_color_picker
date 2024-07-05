@@ -4,15 +4,16 @@ import 'package:unnamed_color_picker/global_variables.dart';
 
 TextTheme textTheme = GoogleFonts.comfortaaTextTheme();
 GlobalVariables gv = GlobalVariables();
+Color colorSchemeSeed = gv.randomRGB;
 
 class Themes {
   static ThemeData lightTheme = ThemeData(
-    colorSchemeSeed: gv.randomRGB,
+    colorSchemeSeed: colorSchemeSeed,
     textTheme: textTheme,
   );
   static ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
-    colorSchemeSeed: gv.randomRGB,
+    colorSchemeSeed: colorSchemeSeed,
     textTheme: textTheme,
   );
 }
