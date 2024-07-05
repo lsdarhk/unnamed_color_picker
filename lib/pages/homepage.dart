@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:unnamed_color_picker/components/palette_containers.dart';
 import 'package:unnamed_color_picker/providers/theme_provider.dart';
 import 'package:unnamed_color_picker/global_variables.dart';
+import 'package:flutter/foundation.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -53,14 +54,23 @@ class _HomepageState extends State<Homepage> {
                 ),
                 child: const Text('Pick a color'),
               ),
-              const SizedBox(width: 15,),
+              const SizedBox(
+                width: 15,
+              ),
               ElevatedButton(
-                onPressed: () => setState(() {
-                  red = Random().nextInt(256);
-                  green = Random().nextInt(256);
-                  blue = Random().nextInt(256);
-                }),
-                child: const Text('Randomize',),
+                onPressed: () {
+                  setState(() {
+                    red = Random().nextInt(256);
+                    green = Random().nextInt(256);
+                    blue = Random().nextInt(256);
+                    if (kDebugMode) {
+                      print('Randomize clicked!');
+                    }
+                  });
+                },
+                child: const Text(
+                  'Randomize',
+                ),
               ),
             ],
           ),

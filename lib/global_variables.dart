@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 
-class GlobalVariables{
+class GlobalVariables {
   final int _r = Random().nextInt(256);
   final int _g = Random().nextInt(256);
   final int _b = Random().nextInt(256);
