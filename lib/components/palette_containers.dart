@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
-//import 'package:unnamed_color_picker/global_variables.dart';
 
 Widget paletteContainers(int r, int g, int b) {
   if(kDebugMode){
     print('paletteContainers rebuilding');
   }
-  //GlobalVariables gv = GlobalVariables();
   r = r.clamp(0, 255);
   g = g.clamp(0, 255);
   b = b.clamp(0, 255);
