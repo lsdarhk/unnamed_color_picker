@@ -12,19 +12,19 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
+  GlobalVariables gv = GlobalVariables();
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
     //ColorScheme colorScheme = Theme.of(context).colorScheme;
-    GlobalVariables gv = GlobalVariables();
-    final int red = gv.r;
-    final int green = gv.g;
-    final int blue = gv.b;
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          paletteContainers(red, green, blue),
+          paletteContainers(gv.r, gv.g, gv.b),
+          const SizedBox(
+            height: 20,
+          ),
           const SizedBox(
             height: 20,
           ),
