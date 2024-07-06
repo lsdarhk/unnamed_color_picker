@@ -1,19 +1,19 @@
-//import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class ThemeProvider extends ChangeNotifier {
-  ThemeMode _theme = ThemeMode.system;
+  ThemeMode _theme = ThemeMode.light;
   ThemeMode get theme => _theme;
-  final systemBrightness =
-      WidgetsBinding.instance.platformDispatcher.platformBrightness;
-  void toggleTheme() {
-    bool isDark =
-        systemBrightness == Brightness.dark || _theme == ThemeMode.dark;
-    if (isDark) {
-      _theme = ThemeMode.light;
-    } else {
-      _theme = ThemeMode.dark;
-    }
+  late bool isDark = _theme == ThemeMode.dark;
+  void toggleTheme(bool value) {
+    isDark = value;
+    _theme = isDark ? ThemeMode.dark : ThemeMode.light;
     notifyListeners();
-  }
-} //theme switcher using ThemeMode
+    // if(kDebugMode) {
+    //   print('systemBrightness: ${WidgetsBinding.instance.platformDispatcher
+    //       .platformBrightness}');
+    //   print('$runtimeType toggled');
+    //   print('isDark: $isDark');
+    //   print('_theme: $_theme');
+    // }
+  }//theme switcher using ThemeMode
+}

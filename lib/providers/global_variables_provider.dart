@@ -8,10 +8,16 @@ class GlobalVariablesProvider extends ChangeNotifier {
   int get r => _r;
   int get g => _g;
   int get b => _b;
+  late Color currentColor = Color.fromRGBO(_r, _g, _b, 1.0);
   void getNewRGB() {
     _r = Random().nextInt(256);
     _g = Random().nextInt(256);
     _b = Random().nextInt(256);
+    currentColor = Color.fromRGBO(_r, _g, _b, 1.0);
+    notifyListeners();
+  }
+  void updateColor(Color color) {
+    currentColor = color;
     notifyListeners();
   }
 }

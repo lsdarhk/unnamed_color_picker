@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:unnamed_color_picker/components/color_picker.dart';
 import 'package:unnamed_color_picker/components/palette_containers.dart';
 import 'package:unnamed_color_picker/providers/theme_provider.dart';
 import 'package:unnamed_color_picker/providers/global_variables_provider.dart';
@@ -15,22 +16,18 @@ class _HomepageState extends State<Homepage> {
   GlobalVariablesProvider gv = GlobalVariablesProvider();
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final themeProvider = Provider.of<ThemeProvider>(context);
     return ChangeNotifierProvider<GlobalVariablesProvider>(
         create: (context) => gv,
         builder: (context, child) {
-          final globalVariables = Provider.of<GlobalVariablesProvider>(context);
-          int red = gv.r;
-          int green = gv.g;
-          int blue = gv.b;
+          final globalVariablesProvider =
+              Provider.of<GlobalVariablesProvider>(context);
           return Scaffold(
             body: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                paletteContainers(red, green, blue),
-                const SizedBox(
-                  height: 20,
-                ),
+                paletteContainers(gv.currentColor, context),
                 const SizedBox(
                   height: 20,
                 ),
@@ -38,28 +35,16 @@ class _HomepageState extends State<Homepage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     ElevatedButton(
-                      onPressed: () => showDialog(
-                        context: context,
-                        builder: (context) => AlertDialog(
-                          title: const Text(
-                            'Pick a color',
-                          ),
-                          content: const Placeholder(),
-                          actions: <Widget>[
-                            ElevatedButton(
-                              onPressed: () => Navigator.of(context).pop(),
-                              child: const Text('Done'),
-                            )
-                          ],
-                        ),
+                      onPressed: () => colorPicker(context),
+                      child: const Text(
+                        'Pick a color',
                       ),
-                      child: const Text('Pick a color'),
                     ),
                     const SizedBox(
                       width: 15,
                     ),
                     ElevatedButton(
-                      onPressed: () => globalVariables.getNewRGB(),
+                      onPressed: () => globalVariablesProvider.getNewRGB(),
                       child: const Text(
                         'Randomize',
                       ),
@@ -67,14 +52,21 @@ class _HomepageState extends State<Homepage> {
                   ],
                 ),
                 const SizedBox(
-                  height: 20,
+                  height: 15,
                 ),
-                ElevatedButton(
-                  onPressed: () => themeProvider.toggleTheme(),
-                  child: const Text('Toggle theme mode'),
-                ),
-                const SizedBox(
-                  width: 40,
+                Transform.scale(
+                  scale: 1.065,
+                  child: Switch(
+                      value: themeProvider.isDark,
+                      activeColor: colorScheme.primary,
+                      thumbIcon: WidgetStateProperty.all(
+                        Icon(
+                          themeProvider.isDark ? Icons.nights_stay : Icons.sunny,
+                        ),
+                      ),
+                      onChanged: (value) {
+                        themeProvider.toggleTheme(value);
+                      }),
                 ),
               ],
             ),
