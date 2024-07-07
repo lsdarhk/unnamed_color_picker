@@ -24,6 +24,8 @@ void colorPicker(BuildContext context) {
             enableAlpha: false,
             pickerColor: gv.currentColor,
             onColorChanged: (color) => globalVariablesProvider.updateColor(color),
+            pickerAreaBorderRadius: BorderRadius.circular(5),
+            displayThumbColor: true,
           ),
         ),
       ),

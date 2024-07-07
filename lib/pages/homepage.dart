@@ -11,9 +11,9 @@ class Homepage extends StatefulWidget {
   @override
   State<Homepage> createState() => _HomepageState();
 }
-
+GlobalVariablesProvider gv = GlobalVariablesProvider();
 class _HomepageState extends State<Homepage> {
-  GlobalVariablesProvider gv = GlobalVariablesProvider();
+  // GlobalVariablesProvider gv = GlobalVariablesProvider();
   @override
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
@@ -44,7 +44,8 @@ class _HomepageState extends State<Homepage> {
                       width: 15,
                     ),
                     ElevatedButton(
-                      onPressed: () => globalVariablesProvider.getNewRGB(),
+                      onPressed: () =>
+                          globalVariablesProvider.getNewRandomRGB(),
                       child: const Text(
                         'Randomize',
                       ),
@@ -61,7 +62,12 @@ class _HomepageState extends State<Homepage> {
                       activeColor: colorScheme.primary,
                       thumbIcon: WidgetStateProperty.all(
                         Icon(
-                          themeProvider.isDark ? Icons.nights_stay : Icons.sunny,
+                          themeProvider.isDark
+                              ? Icons.nights_stay
+                              : Icons.sunny,
+                          color: themeProvider.isDark
+                              ? colorScheme.onPrimary
+                              : colorScheme.surfaceDim,
                         ),
                       ),
                       onChanged: (value) {

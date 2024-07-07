@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:unnamed_color_picker/components/color_picker.dart';
 
@@ -7,7 +8,7 @@ Widget paletteContainers(Color color, BuildContext context) {
   int r = color.red;
   int g = color.green;
   int b = color.blue;
-  Color complimentColor = Color.fromRGBO(255 - r, 255 - g, 255 - b, 1.0);
+  Color complementColor = Color.fromRGBO(255 - r, 255 - g, 255 - b, 1.0);
   const double size = 165;
   return Row(
     mainAxisAlignment: MainAxisAlignment.center,
@@ -30,10 +31,13 @@ Widget paletteContainers(Color color, BuildContext context) {
               ),
             ),
           ),
-          Text(
-            '$r, $g, $b',
-            style: GoogleFonts.jetBrainsMono(
-              color: colorScheme.onSurface,
+          GestureDetector(
+            onTap: () => Clipboard.setData(ClipboardData(text: '$r, $g, $b')),
+            child: Text(
+              '$r, $g, $b',
+              style: GoogleFonts.jetBrainsMono(
+                color: colorScheme.onSurface,
+              ),
             ),
           ),
         ],
@@ -41,7 +45,7 @@ Widget paletteContainers(Color color, BuildContext context) {
       Column(
         children: <Widget>[
           Text(
-            'Compliment Color',
+            'Complement Color',
             style: TextStyle(color: colorScheme.onSurface),
           ),
           Container(
@@ -50,13 +54,18 @@ Widget paletteContainers(Color color, BuildContext context) {
             width: size,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(25),
-              color: complimentColor,
+              color: complementColor,
             ),
           ),
-          Text(
-            '${complimentColor.red}, ${complimentColor.green}, ${complimentColor.blue}',
-            style: GoogleFonts.jetBrainsMono(
-              color: colorScheme.onSurface,
+          GestureDetector(
+            onTap: () => Clipboard.setData(ClipboardData(
+                text:
+                    '${complementColor.red}, ${complementColor.green}, ${complementColor.blue}')),
+            child: Text(
+              '${complementColor.red}, ${complementColor.green}, ${complementColor.blue}',
+              style: GoogleFonts.jetBrainsMono(
+                color: colorScheme.onSurface,
+              ),
             ),
           ),
         ],
