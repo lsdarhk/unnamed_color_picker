@@ -30,7 +30,10 @@ class _ColorPickerAppState extends State<ColorPickerApp> {
         ],
         builder: (context, child) {
           ColorScheme colorScheme = Theme.of(context).colorScheme;
-          TextTheme textTheme = GoogleFonts.latoTextTheme();
+          TextTheme textTheme = GoogleFonts.latoTextTheme().apply(
+            bodyColor: colorScheme.onSurface,
+            displayColor: colorScheme.onSurface,
+          );
           final themeProvider = Provider.of<ThemeProvider>(context);
           final globalVariablesProvider =
               Provider.of<GlobalVariablesProvider>(context);
@@ -39,18 +42,12 @@ class _ColorPickerAppState extends State<ColorPickerApp> {
             home: const Homepage(),
             theme: ThemeData(
               colorSchemeSeed: colorSchemeSeed,
-              textTheme: textTheme.apply(
-                bodyColor: colorScheme.onSurface,
-                displayColor: colorScheme.onSurface,
-              ),
+              textTheme: textTheme
             ),
             darkTheme: ThemeData(
               brightness: Brightness.dark,
               colorSchemeSeed: colorSchemeSeed,
-              textTheme: textTheme.apply(
-                bodyColor: colorScheme.onSurface,
-                displayColor: colorScheme.onSurface,
-              ),
+              textTheme: textTheme
             ),
             themeMode: themeProvider.theme,
             debugShowCheckedModeBanner: false,
