@@ -8,12 +8,5 @@ class ThemeProvider extends ChangeNotifier {
     isDark = value;
     _theme = isDark ? ThemeMode.dark : ThemeMode.light;
     notifyListeners();
-    // if(kDebugMode) {
-    //   print('systemBrightness: ${WidgetsBinding.instance.platformDispatcher
-    //       .platformBrightness}');
-    //   print('$runtimeType toggled');
-    //   print('isDark: $isDark');
-    //   print('_theme: $_theme');
-    // }
   }//theme switcher using ThemeMode
 }

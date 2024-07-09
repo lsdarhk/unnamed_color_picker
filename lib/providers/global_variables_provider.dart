@@ -16,6 +16,7 @@ class GlobalVariablesProvider extends ChangeNotifier {
     currentColor = Color.fromRGBO(_r, _g, _b, 1.0);
     notifyListeners();
   }
+
   void updateColor(Color color) {
     currentColor = color;
     notifyListeners();

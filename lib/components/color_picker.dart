@@ -5,7 +5,6 @@ import 'package:unnamed_color_picker/providers/global_variables_provider.dart';
 
 void colorPicker(BuildContext context) {
   ColorScheme colorScheme = Theme.of(context).colorScheme;
-  GlobalVariablesProvider gv = GlobalVariablesProvider();
   final globalVariablesProvider = Provider.of<GlobalVariablesProvider>(context, listen: false);
   showDialog(
     context: context,
@@ -18,14 +17,16 @@ void colorPicker(BuildContext context) {
       ),
       content: SizedBox(
         height: 450,
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-          child: ColorPicker(
-            enableAlpha: false,
-            pickerColor: gv.currentColor,
-            onColorChanged: (color) => globalVariablesProvider.updateColor(color),
-            pickerAreaBorderRadius: BorderRadius.circular(5),
-            displayThumbColor: true,
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+            child: ColorPicker(
+              enableAlpha: false,
+              pickerColor: globalVariablesProvider.currentColor,
+              onColorChanged: (color) => globalVariablesProvider.updateColor(color),
+              pickerAreaBorderRadius: BorderRadius.circular(5),
+              displayThumbColor: true,
+            ),
           ),
         ),
       ),

@@ -11,15 +11,14 @@ class Homepage extends StatefulWidget {
   @override
   State<Homepage> createState() => _HomepageState();
 }
-GlobalVariablesProvider gv = GlobalVariablesProvider();
+
 class _HomepageState extends State<Homepage> {
-  // GlobalVariablesProvider gv = GlobalVariablesProvider();
   @override
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final themeProvider = Provider.of<ThemeProvider>(context);
     return ChangeNotifierProvider<GlobalVariablesProvider>(
-        create: (context) => gv,
+        create: (context) => GlobalVariablesProvider(),
         builder: (context, child) {
           final globalVariablesProvider =
               Provider.of<GlobalVariablesProvider>(context);
@@ -27,7 +26,7 @@ class _HomepageState extends State<Homepage> {
             body: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                paletteContainers(gv.currentColor, context),
+                paletteContainers(globalVariablesProvider.currentColor, context),
                 const SizedBox(
                   height: 20,
                 ),
